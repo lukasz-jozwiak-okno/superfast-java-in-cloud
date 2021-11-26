@@ -3,7 +3,17 @@ buildscript {
         groovyAllVersion = '3.0.8'
         junitVersion = '5.8.1'
         spockVersion = '2.0-groovy-3.0'
+        spotlessVersion = '6.0.0'
+        spotBugsVersion = '4.8.0'
+        checkstyleToolVersion = '9.1'
+        pmdToolVersion = '6.40.0'
     }
+}
+
+plugins {
+    id 'com.diffplug.spotless' version "$spotlessVersion" apply false
+    id 'idea'
+    id 'com.github.spotbugs' version "$spotBugsVersion" apply false
 }
 
 subprojects {
@@ -16,6 +26,10 @@ subprojects {
     }
 
     apply plugin: 'java'
+    apply plugin: 'com.diffplug.spotless'
+    apply plugin: 'checkstyle'
+    apply plugin: 'pmd'
+    apply plugin: 'jacoco'
 
     dependencies {
         constraints {
@@ -24,5 +38,26 @@ subprojects {
             testImplementation "org.spockframework:spock-core:$spockVersion"
             testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
         }
+    }
+
+    spotless {
+        java {
+            googleJavaFormat()
+        }
+    }
+
+    checkstyle { toolVersion "$checkstyleToolVersion" }
+
+    tasks.withType(Checkstyle) {
+        reports {
+            xml.required = false
+            html.required = true
+            html.stylesheet resources.text.fromFile(rootProject.projectDir.getAbsolutePath() + '/config/checkstyle/checkstyle-simple.xsl')
+        }
+    }
+
+    pmd {
+        consoleOutput = true
+        toolVersion = "$pmdToolVersion"
     }
 }
