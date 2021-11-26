@@ -1,23 +1,28 @@
-plugins {
-    id 'groovy'
-    id 'java'
+buildscript {
+    ext {
+        groovyAllVersion = '3.0.8'
+        junitVersion = '5.8.1'
+        spockVersion = '2.0-groovy-3.0'
+    }
 }
 
-group 'pl.edu.pw.ljozwiak'
-version '1.0-SNAPSHOT'
+subprojects {
 
-repositories {
-    mavenCentral()
-}
+    group 'pl.edu.pw.ljozwiak'
+    version '1.0-SNAPSHOT'
 
-dependencies {
-    implementation 'org.codehaus.groovy:groovy-all:3.0.5'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-}
+    repositories {
+        mavenCentral()
+    }
 
-test {
-    useJUnitPlatform()
+    apply plugin: 'java'
+
+    dependencies {
+        constraints {
+            testImplementation "org.codehaus.groovy:groovy-all:$groovyAllVersion"
+            testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+            testImplementation "org.spockframework:spock-core:$spockVersion"
+            testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+        }
+    }
 }
