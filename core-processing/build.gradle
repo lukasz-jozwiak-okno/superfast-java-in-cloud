@@ -1,8 +1,5 @@
-plugins {
-    id 'groovy'
-}
-
 dependencies {
     testImplementation 'org.codehaus.groovy:groovy-all'
     testImplementation 'org.spockframework:spock-core'
+    testImplementation 'com.athaydes:spock-reports'
 }
