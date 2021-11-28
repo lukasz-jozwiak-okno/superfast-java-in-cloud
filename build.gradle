@@ -1,7 +1,7 @@
 buildscript {
     ext {
         groovyAllVersion = '3.0.9'
-        junitVersion = '5.8.1'
+        junitVersion = '5.8.2'
         spockVersion = '2.0-groovy-3.0'
         spotlessVersion = '6.0.0'
         spockReportsVersion = '2.1.1-groovy-3.0'
