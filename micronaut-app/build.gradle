@@ -28,12 +28,9 @@ dependencies {
     compileOnly("org.graalvm.nativeimage:svm")
 
     implementation("io.micronaut:micronaut-validation")
-
 }
 
-
 application {
-
     mainClass.set("pl.edu.pw.ljozwiak.Application")
 }
 
@@ -41,4 +38,3 @@ java {
     sourceCompatibility = JavaVersion.toVersion("11")
     targetCompatibility = JavaVersion.toVersion("11")
 }
-
