@@ -1,2 +1,26 @@
 greeting:
   message: "hello"
+
+# The Kafka broker location (defaults to localhost:9092)
+kafka:
+  bootstrap:
+    servers: localhost:29092
+
+mp:
+  messaging:
+    incoming:
+      movies-in:
+        connector: smallrye-kafka
+        topic: movies
+        key:
+          deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+        value:
+          deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    outgoing:
+      movies-out:
+        connector: smallrye-kafka
+        topic: movies
+        key:
+          deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+        value:
+          deserializer: org.apache.kafka.common.serialization.StringDeserializer
