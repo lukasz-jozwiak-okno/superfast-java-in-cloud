@@ -5,6 +5,10 @@ import java.util.Map;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.utility.DockerImageName;
 
+/**
+ * Based on https://www.morling.dev/blog/quarkus-and-testcontainers/ Alternative
+ * https://stackoverflow.com/questions/61447252/integration-testing-with-testcontainers-quarkus-mongodb
+ */
 public class KafkaResourceTestLifecycleManager implements QuarkusTestResourceLifecycleManager {
 
   private static final Object lock = new Object();

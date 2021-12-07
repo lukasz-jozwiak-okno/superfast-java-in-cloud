@@ -6,5 +6,5 @@ import lombok.Data;
 public class Movie {
 
   public final String title;
-  public final int year;
+  public final String year;
 }

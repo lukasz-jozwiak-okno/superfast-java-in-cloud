@@ -7,3 +7,8 @@ docker run  -p 8080:8080 quarkus-app-native
 ```
 
 https://quarkus.io/guides/gradle-tooling
+
+Run quarkus app
+```sh
+java -Dquarkus.profile=devDocker -jar quarkus-app/build/quarkus-app/quarkus-run.jar
+```
