@@ -7,7 +7,7 @@ buildscript {
         spockReportsVersion = '2.1.1-groovy-3.0'
         testContainersVersion = '1.16.2'
         awaitilityVersion = '4.1.1'
-        lombokVersion = '1.18.12'
+        lombokVersion = '1.18.22'
     }
 }
 
