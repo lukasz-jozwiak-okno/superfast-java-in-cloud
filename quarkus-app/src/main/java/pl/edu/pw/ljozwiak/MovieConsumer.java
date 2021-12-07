@@ -10,7 +10,7 @@ import org.eclipse.microprofile.reactive.messaging.Incoming;
 public class MovieConsumer {
 
   @Incoming("movies-in")
-  public void receive(Record<Integer, String> record) {
+  public void receive(Record<String, String> record) {
     log.info("Message received key: {}, and value: {}", record.key(), record.value());
   }
 }

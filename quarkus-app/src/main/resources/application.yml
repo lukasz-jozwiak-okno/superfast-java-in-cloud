@@ -1,10 +1,6 @@
+# select profile https://stackoverflow.com/questions/65795595/how-to-choose-quarkus-profile-when-running-app-under-idea
 greeting:
   message: "hello"
-
-# The Kafka broker location (defaults to localhost:9092)
-kafka:
-  bootstrap:
-    servers: localhost:29092
 
 mp:
   messaging:
@@ -13,7 +9,7 @@ mp:
         connector: smallrye-kafka
         topic: movies
         key:
-          deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+          deserializer: org.apache.kafka.common.serialization.StringDeserializer
         value:
           deserializer: org.apache.kafka.common.serialization.StringDeserializer
     outgoing:
@@ -21,6 +17,6 @@ mp:
         connector: smallrye-kafka
         topic: movies
         key:
-          deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+          deserializer: org.apache.kafka.common.serialization.StringDeserializer
         value:
           deserializer: org.apache.kafka.common.serialization.StringDeserializer

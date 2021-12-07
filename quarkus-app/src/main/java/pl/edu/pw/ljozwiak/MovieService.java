@@ -10,7 +10,7 @@ public class MovieService {
   private final MovieProducer movieProducer;
 
   public void sendMessageToKafka() {
-    Movie movie = new Movie("Matrix", 1998);
+    Movie movie = new Movie("Matrix", "1998");
     movieProducer.sendMovieToKafka(movie);
   }
 }

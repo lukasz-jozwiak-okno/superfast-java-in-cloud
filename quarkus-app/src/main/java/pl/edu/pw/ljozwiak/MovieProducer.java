@@ -13,7 +13,7 @@ public class MovieProducer {
 
   @Inject
   @Channel("movies-out")
-  Emitter<Record<Integer, String>> emitter;
+  Emitter<Record<String, String>> emitter;
 
   public void sendMovieToKafka(Movie movie) {
     emitter.send(Record.of(movie.year, movie.title));

@@ -1,24 +1,4 @@
+# select profile https://stackoverflow.com/questions/62999149/how-can-i-use-environment-specific-variables-in-micronaut
 micronaut:
   application:
     name: demo
-kafka:
-  bootstrap:
-    servers: localhost:29092
-#mp:
-#  messaging:
-#    incoming:
-#      movies-in:
-#        connector: smallrye-kafka
-#        topic: movies
-#        key:
-#          deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
-#        value:
-#          deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#    outgoing:
-#      movies-out:
-#        connector: smallrye-kafka
-#        topic: movies
-#        key:
-#          deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
-#        value:
-#          deserializer: org.apache.kafka.common.serialization.StringDeserializer
