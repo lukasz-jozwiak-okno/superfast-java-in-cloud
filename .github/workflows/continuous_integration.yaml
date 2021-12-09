@@ -1,3 +1,4 @@
+# Cloud Run deploy after: https://medium.com/google-cloud/how-to-deploy-your-cloud-run-service-using-github-actions-e5b6a6f597a3
 name: Java CI
 
 on:
@@ -24,51 +25,78 @@ jobs:
       - name: Build and test
         run: ./gradlew build --info --stacktrace
 
-      - name: Build Quarkus native
-        run: ./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
+      - name: Build Quarkus native image
+        run: |
+          ./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
+          docker build -f quarkus-app/src/main/docker/Dockerfile.native -t lukaszjozwiak/quarkus-app:native quarkus-app
 
       - name: Create Quarkus jvm image
         run: docker build -f quarkus-app/src/main/docker/Dockerfile.jvm -t lukaszjozwiak/quarkus-app:jvm quarkus-app
 
-      - name: Create Quarkus native image
-        run: docker build -f quarkus-app/src/main/docker/Dockerfile.native -t lukaszjozwiak/quarkus-app:native quarkus-app
+      - name: Create Micronaut native image
+        run: |
+          ./gradlew micronaut-app:dockerBuildNative
+          docker image tag micronaut-app:latest lukaszjozwiak/micronaut-app:native
 
       - name: Create Micronaut jvm image
         run: docker build -f micronaut-app/src/main/docker/Dockerfile.jvm -t lukaszjozwiak/micronaut-app:jvm micronaut-app
 
-      - name: Create Micronaut native image
-        run: ./gradlew micronaut-app:dockerBuildNative
-
-      - name: Rename Micronaut native image
-        run: docker image tag micronaut-app:latest lukaszjozwiak/micronaut-app:native
-
-      - name: Set up QEMU
+      - name: Authenticate to Google Cloud
         if: github.ref == 'refs/heads/master'
-        uses: docker/setup-qemu-action@v1
-
-      - name: Set up Docker Buildx
-        if: github.ref == 'refs/heads/master'
-        uses: docker/setup-buildx-action@v1
-
-      - name: Login to DockerHub
-        if: github.ref == 'refs/heads/master'
-        uses: docker/login-action@v1
+        id: auth
+        uses: google-github-actions/auth@v0
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Push Quarkus jvm image
+      - name: Configure Docker
         if: github.ref == 'refs/heads/master'
-        run:  docker push lukaszjozwiak/quarkus-app:jvm
+        run: |
+          gcloud auth configure-docker
 
-      - name: Push Quarkus native image
+      - name: Deploy Micronaut Jvm App
         if: github.ref == 'refs/heads/master'
-        run:  docker push lukaszjozwiak/quarkus-app:native
+        run: |
+          docker image tag lukaszjozwiak/micronaut-app:jvm eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:jvm
+          docker push eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:jvm
+          gcloud run deploy micronaut-app-jvm \
+          --region europe-central2 \
+          --image eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:jvm \
+          --platform managed \
+          --allow-unauthenticated \
+          --project ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Push Micronaut jvm image
+      - name: Deploy Micronaut Native App
         if: github.ref == 'refs/heads/master'
-        run:  docker push lukaszjozwiak/micronaut-app:jvm
+        run: |
+          docker image tag lukaszjozwiak/micronaut-app:native eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:native
+          docker push eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:native
+          gcloud run deploy micronaut-app-native \
+          --region europe-central2 \
+          --image eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:native \
+          --platform managed \
+          --allow-unauthenticated \
+          --project ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Push Micronaut native image
+      - name: Deploy Quarkus Jvm App
         if: github.ref == 'refs/heads/master'
-        run:  docker push lukaszjozwiak/micronaut-app:native
+        run: |
+          docker image tag lukaszjozwiak/quarkus-app:jvm eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/quarkus-app:jvm
+          docker push eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/quarkus-app:jvm
+          gcloud run deploy quarkus-app-jvm \
+          --region europe-central2 \
+          --image eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/quarkus-app:jvm \
+          --platform managed \
+          --allow-unauthenticated \
+          --project ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Deploy Quarkus Native App
+        if: github.ref == 'refs/heads/master'
+        run: |
+          docker image tag lukaszjozwiak/quarkus-app:native eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/quarkus-app:native
+          docker push eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/quarkus-app:native
+          gcloud run deploy quarkus-app-native \
+          --region europe-central2 \
+          --image eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/quarkus-app:native \
+          --platform managed \
+          --allow-unauthenticated \
+          --project ${{ secrets.GCP_PROJECT_ID }}
