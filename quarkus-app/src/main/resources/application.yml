@@ -3,3 +3,12 @@
 greeting:
   message: "hello"
 
+"%dev":
+  quarkus:
+    mongodb:
+      connection-string: mongodb://localhost:27017/test
+
+"%prod":
+  quarkus:
+    mongodb:
+      connection-string: <PLACEHOLDER>

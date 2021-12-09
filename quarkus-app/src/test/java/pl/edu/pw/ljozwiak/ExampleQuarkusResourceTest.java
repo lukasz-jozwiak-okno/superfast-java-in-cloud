@@ -7,10 +7,10 @@ import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
 @QuarkusTest
-public class ExampleResourceTest {
+public class ExampleQuarkusResourceTest {
 
   @Test
   public void testHelloEndpoint() {
-    given().when().get("/hello").then().statusCode(200).body(is("Hello RESTEasy"));
+    given().when().get("/hello").then().statusCode(200).body(is("admin"));
   }
 }
