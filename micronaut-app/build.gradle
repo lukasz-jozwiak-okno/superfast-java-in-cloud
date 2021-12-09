@@ -18,20 +18,23 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'io.micronaut:micronaut-http-validation'
     annotationProcessor 'io.micronaut.jaxrs:micronaut-jaxrs-processor'
+
+    implementation project(':core-processing')
+
     implementation 'io.micronaut:micronaut-http-client'
     implementation 'io.micronaut:micronaut-runtime'
     implementation 'io.micronaut.jaxrs:micronaut-jaxrs-server'
     implementation 'io.micronaut.rxjava3:micronaut-rxjava3'
     implementation 'io.micronaut.rxjava3:micronaut-rxjava3-http-client'
     implementation 'javax.annotation:javax.annotation-api'
-    implementation 'io.micronaut.kafka:micronaut-kafka'
+    implementation 'io.micronaut.mongodb:micronaut-mongo-sync'
     implementation 'io.micronaut:micronaut-validation'
     implementation 'io.micronaut.reactor:micronaut-reactor'
     runtimeOnly 'ch.qos.logback:logback-classic'
     compileOnly 'org.graalvm.nativeimage:svm'
 
     testAnnotationProcessor 'io.micronaut.jaxrs:micronaut-jaxrs-processor'
-    testImplementation 'org.testcontainers:kafka'
+    testImplementation 'org.testcontainers:mongodb'
     testImplementation 'org.awaitility:awaitility'
 }
 
