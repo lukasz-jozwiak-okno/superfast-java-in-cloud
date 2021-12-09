@@ -1,22 +1,5 @@
 # select profile https://stackoverflow.com/questions/65795595/how-to-choose-quarkus-profile-when-running-app-under-idea
+# profile properties can be set by prefixing property: https://antoniogoncalves.org/2019/11/07/configuring-a-quarkus-application-with-profiles/
 greeting:
   message: "hello"
 
-mp:
-  messaging:
-    incoming:
-      movies-in:
-        connector: smallrye-kafka
-        topic: movies
-        key:
-          deserializer: org.apache.kafka.common.serialization.StringDeserializer
-        value:
-          deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    outgoing:
-      movies-out:
-        connector: smallrye-kafka
-        topic: movies
-        key:
-          deserializer: org.apache.kafka.common.serialization.StringDeserializer
-        value:
-          deserializer: org.apache.kafka.common.serialization.StringDeserializer
