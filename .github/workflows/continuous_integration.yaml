@@ -63,8 +63,8 @@ jobs:
           --image eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:jvm \
           --platform managed \
           --allow-unauthenticated \
-          --project ${{ secrets.GCP_PROJECT_ID }}
-          --set-env-vars MONGODB_URI=${{ secrets.MONGO_URL }}
+          --project ${{ secrets.GCP_PROJECT_ID }} \
+          --set-env-vars "MONGODB_URI=${{ secrets.MONGO_URL }}"
 
       - name: Deploy Micronaut Native App
         if: github.ref == 'refs/heads/master'
@@ -76,8 +76,8 @@ jobs:
           --image eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:native \
           --platform managed \
           --allow-unauthenticated \
-          --project ${{ secrets.GCP_PROJECT_ID }}
-          --set-env-vars MONGODB_URI=${{ secrets.MONGO_URL }}
+          --project ${{ secrets.GCP_PROJECT_ID }} \
+          --set-env-vars "MONGODB_URI=${{ secrets.MONGO_URL }}"
 
       - name: Deploy Quarkus Jvm App
         if: github.ref == 'refs/heads/master'
@@ -89,9 +89,11 @@ jobs:
           --image eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/quarkus-app:jvm \
           --platform managed \
           --allow-unauthenticated \
-          --project ${{ secrets.GCP_PROJECT_ID }}
-          --set-env-vars QUARKUS_MONGODB_CONNECTION_STRING=${{ secrets.MONGO_URL }}
+          --project ${{ secrets.GCP_PROJECT_ID }} \
+          --set-env-vars "QUARKUS_MONGODB_CONNECTION_STRING=${{ secrets.MONGO_URL }}"
 
+        # Mongo URL requires to be in old format https://github.com/quarkusio/quarkus/issues/7986
+        # Escape commas in Mongo URL https://ahmet.im/blog/mastering-cloud-run-environment-variables/
       - name: Deploy Quarkus Native App
         if: github.ref == 'refs/heads/master'
         run: |
@@ -103,4 +105,4 @@ jobs:
           --platform managed \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }} \
-          --set-env-vars QUARKUS_MONGODB_CONNECTION_STRING=${{ secrets.MONGO_URL }}
+          --set-env-vars "^##^QUARKUS_MONGODB_CONNECTION_STRING=${{ secrets.MONGO_URL_OLD }}"
