@@ -1,69 +1,73 @@
 buildscript {
-    ext {
-        groovyAllVersion = '3.0.9'
-        junitVersion = '5.8.2'
-        spockVersion = '2.0-groovy-3.0'
-        spotlessVersion = '6.0.0'
-        spockReportsVersion = '2.1.1-groovy-3.0'
-        testContainersVersion = '1.16.2'
-        awaitilityVersion = '4.1.1'
-        lombokVersion = '1.18.22'
-        javaFakerVersion = '1.0.2'
-        springBootVersion = '2.6.1'
-        springDependencyManagementVersion = '1.0.11.RELEASE'
-        shadowJarVersion = '7.1.0'
-        micronautVersion = '3.2.0'
-        micronautPluginVersion = '2.0.8'
-        quarkusPluginVersion = '2.5.1.Final'
-        quarkusPlatformVersion = '2.5.1.Final'
-        jCommanderVersion = '1.81'
-    }
+  ext {
+    groovyAllVersion = '3.0.9'
+    junitVersion = '5.8.2'
+    spockVersion = '2.0-groovy-3.0'
+    spotlessVersion = '6.0.0'
+    spockReportsVersion = '2.1.1-groovy-3.0'
+    testContainersVersion = '1.16.2'
+    awaitilityVersion = '4.1.1'
+    lombokVersion = '1.18.22'
+    javaFakerVersion = '1.0.2'
+    springBootVersion = '2.6.1'
+    springDependencyManagementVersion = '1.0.11.RELEASE'
+    shadowJarVersion = '7.1.0'
+    micronautVersion = '3.2.0'
+    micronautPluginVersion = '2.0.8'
+    quarkusPluginVersion = '2.5.1.Final'
+    quarkusPlatformVersion = '2.5.1.Final'
+    jCommanderVersion = '1.81'
+    tinyLogVersion = '2.4.1'
+    slf4jVersion = '1.7.32'
+    guavaVersion = '31.0.1-jre'
+    restAssuredVersion = '4.4.0'
+  }
 }
 
 plugins {
-    id 'idea'
-    id 'java'
-    id 'groovy'
-    id 'com.diffplug.spotless' version "$spotlessVersion"
+  id 'idea'
+  id 'java'
+  id 'groovy'
+  id 'com.diffplug.spotless' version "$spotlessVersion"
 }
 
 project('core-processing') {
-    apply plugin: 'groovy'
+  apply plugin: 'groovy'
 }
 
 subprojects {
-    group 'pl.edu.pw.ljozwiak'
-    version '1.0-SNAPSHOT'
+  group 'pl.edu.pw.ljozwiak'
+  version '1.0-SNAPSHOT'
 
-    repositories {
-        mavenCentral()
-    }
+  repositories {
+    mavenCentral()
+  }
 
-    apply plugin: 'java'
-    apply plugin: 'groovy'
-    apply plugin: 'com.diffplug.spotless'
+  apply plugin: 'java'
+  apply plugin: 'groovy'
+  apply plugin: 'com.diffplug.spotless'
 
-    spotless {
-        java {
-            googleJavaFormat()
-        }
-    }
-
-    test {
-        useJUnitPlatform()
-    }
-
+  spotless {
     java {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+      googleJavaFormat()
     }
+  }
 
-    compileJava {
-        options.encoding = 'UTF-8'
-        options.compilerArgs << '-parameters'
-    }
+  test {
+    useJUnitPlatform()
+  }
 
-    compileTestJava {
-        options.encoding = 'UTF-8'
-    }
+  java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+  }
+
+  compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+  }
+
+  compileTestJava {
+    options.encoding = 'UTF-8'
+  }
 }

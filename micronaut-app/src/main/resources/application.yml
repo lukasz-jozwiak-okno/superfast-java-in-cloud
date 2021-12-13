@@ -2,3 +2,8 @@
 micronaut:
   application:
     name: demo
+
+app:
+  mongoDbName: okno
+  mongoDbTelemetryCollection: telemetry
+  mongoDbReportCollection: report
