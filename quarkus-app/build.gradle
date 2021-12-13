@@ -1,13 +1,12 @@
 plugins {
     id 'java'
-    id 'io.quarkus' version '2.5.1.Final'
+    id 'io.quarkus' version "$quarkusPluginVersion"
 }
 
 dependencies {
-    // TODO why constraint from parent project doesn't work
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    testCompileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
     implementation project(':core-processing')
 
@@ -20,20 +19,7 @@ dependencies {
 
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
-    testImplementation 'org.testcontainers:mongodb'
-    testImplementation 'org.awaitility:awaitility'
-}
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-
-compileJava {
-    options.encoding = 'UTF-8'
-    options.compilerArgs << '-parameters'
-}
-
-compileTestJava {
-    options.encoding = 'UTF-8'
+    testImplementation "org.testcontainers:mongodb:$testContainersVersion"
+    testImplementation "org.awaitility:awaitility:$awaitilityVersion"
 }

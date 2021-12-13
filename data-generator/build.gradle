@@ -1,0 +1,20 @@
+plugins {
+    id 'org.springframework.boot' version "$springBootVersion"
+    id 'io.spring.dependency-management' version "$springDependencyManagementVersion"
+}
+
+dependencies {
+    implementation project(':core-processing')
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    implementation "com.beust:jcommander:$jCommanderVersion"
+    implementation "com.github.javafaker:javafaker:$javaFakerVersion"
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "org.testcontainers:mongodb:$testContainersVersion"
+    testImplementation "org.codehaus.groovy:groovy-all:$groovyAllVersion"
+    testImplementation "org.spockframework:spock-core:$spockVersion"
+    testImplementation "com.athaydes:spock-reports:$spockReportsVersion"
+}
