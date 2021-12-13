@@ -1,9 +1,9 @@
 dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    testCompileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
-    testImplementation 'org.codehaus.groovy:groovy-all'
-    testImplementation 'org.spockframework:spock-core'
-    testImplementation 'com.athaydes:spock-reports'
+    testImplementation "org.codehaus.groovy:groovy-all:$groovyAllVersion"
+    testImplementation "org.spockframework:spock-core:$spockVersion"
+    testImplementation "com.athaydes:spock-reports:$spockReportsVersion"
 }

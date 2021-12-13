@@ -1,7 +1,7 @@
 plugins {
-    id('groovy')
-    id('com.github.johnrengelman.shadow') version '7.1.0'
-    id('io.micronaut.application') version '2.0.8'
+    id 'groovy'
+    id 'com.github.johnrengelman.shadow' version "$shadowJarVersion"
+    id 'io.micronaut.application'  version "$micronautPluginVersion"
 }
 
 micronaut {
@@ -14,8 +14,8 @@ micronaut {
 }
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor 'io.micronaut:micronaut-http-validation'
     annotationProcessor 'io.micronaut.jaxrs:micronaut-jaxrs-processor'
 
@@ -34,15 +34,10 @@ dependencies {
     compileOnly 'org.graalvm.nativeimage:svm'
 
     testAnnotationProcessor 'io.micronaut.jaxrs:micronaut-jaxrs-processor'
-    testImplementation 'org.testcontainers:mongodb'
-    testImplementation 'org.awaitility:awaitility'
+    testImplementation "org.testcontainers:mongodb:$testContainersVersion"
+    testImplementation "org.awaitility:awaitility:$awaitilityVersion"
 }
 
 application {
     mainClass.set('pl.edu.pw.ljozwiak.Application')
-}
-
-java {
-    sourceCompatibility = JavaVersion.toVersion('11')
-    targetCompatibility = JavaVersion.toVersion('11')
 }
