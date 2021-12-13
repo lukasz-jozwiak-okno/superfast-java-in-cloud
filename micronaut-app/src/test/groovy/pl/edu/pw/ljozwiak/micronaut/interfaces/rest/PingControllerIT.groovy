@@ -3,10 +3,10 @@ package pl.edu.pw.ljozwiak.micronaut.interfaces.rest
 import io.micronaut.runtime.server.EmbeddedServer
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
-import org.hamcrest.CoreMatchers
 import spock.lang.Specification
 
 import static io.restassured.RestAssured.given
+import static org.hamcrest.CoreMatchers.equalTo
 
 @MicronautTest
 class PingControllerIT extends Specification {
@@ -20,6 +20,6 @@ class PingControllerIT extends Specification {
           .get("${server.getURL()}ping")
           .then()
           .statusCode(200)
-          .body(CoreMatchers.equalTo('ping'))
+          .body(equalTo('ping'))
   }
 }

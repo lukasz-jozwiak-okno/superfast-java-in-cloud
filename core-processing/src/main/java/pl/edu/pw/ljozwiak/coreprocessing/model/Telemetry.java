@@ -1,5 +1,6 @@
-package pl.edu.pw.ljozwiak.coreprocessing.telemetry;
+package pl.edu.pw.ljozwiak.coreprocessing.model;
 
+import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,8 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Report {
+public class Telemetry {
 
   private String id;
-  private double averageSpeed;
+  private Instant time;
+  private int speed;
+  private double fuelLevel;
 }

@@ -2,6 +2,8 @@ package pl.edu.pw.ljozwiak.datagenerator.process;
 
 import com.github.javafaker.Faker;
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Supplier;
@@ -10,7 +12,7 @@ import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
-import pl.edu.pw.ljozwiak.coreprocessing.telemetry.Telemetry;
+import pl.edu.pw.ljozwiak.coreprocessing.model.Telemetry;
 import pl.edu.pw.ljozwiak.datagenerator.argument.GenerateDataCommand;
 
 @RequiredArgsConstructor
@@ -49,6 +51,7 @@ public class GenerateCommandHandler {
   static Telemetry fakeTelemetry() {
     return Telemetry.builder()
         .id(UUID.randomUUID().toString())
+        .time(LocalDateTime.now().toInstant(ZoneOffset.UTC))
         .speed(faker.number().numberBetween(0, 300))
         .fuelLevel(faker.number().numberBetween(0, 100))
         .build();

@@ -1,20 +1,17 @@
-package pl.edu.pw.ljozwiak.quarkus.infrastructure.mongo;
+package pl.edu.pw.ljozwiak.coreprocessing.repository;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
-import pl.edu.pw.ljozwiak.coreprocessing.telemetry.Report;
-import pl.edu.pw.ljozwiak.quarkus.domain.AppProperties;
+import pl.edu.pw.ljozwiak.coreprocessing.model.Report;
 
-@ApplicationScoped
 @RequiredArgsConstructor
 public class ReportRepository {
 
   private final MongoClient mongoClient;
-  private final AppProperties appProperties;
+  private final MongoProperties mongoProperties;
 
   public String insertOne(Report report) {
     return getCollection().insertOne(report).getInsertedId().asString().getValue();
@@ -34,7 +31,7 @@ public class ReportRepository {
 
   private MongoCollection<Report> getCollection() {
     return mongoClient
-        .getDatabase(appProperties.getMongoDbName())
-        .getCollection(appProperties.getMongoDbReportCollection(), Report.class);
+        .getDatabase(mongoProperties.getMongoDbName())
+        .getCollection(mongoProperties.getMongoDbReportCollection(), Report.class);
   }
 }

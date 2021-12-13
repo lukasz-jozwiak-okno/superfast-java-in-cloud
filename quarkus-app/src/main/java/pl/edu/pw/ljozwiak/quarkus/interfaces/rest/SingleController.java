@@ -5,11 +5,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import lombok.RequiredArgsConstructor;
-import pl.edu.pw.ljozwiak.coreprocessing.telemetry.Report;
-import pl.edu.pw.ljozwiak.coreprocessing.telemetry.Telemetry;
-import pl.edu.pw.ljozwiak.coreprocessing.telemetry.TelemetryProcessor;
-import pl.edu.pw.ljozwiak.quarkus.infrastructure.mongo.ReportRepository;
-import pl.edu.pw.ljozwiak.quarkus.infrastructure.mongo.TelemetryRepository;
+import pl.edu.pw.ljozwiak.coreprocessing.TelemetryProcessor;
+import pl.edu.pw.ljozwiak.coreprocessing.model.Report;
+import pl.edu.pw.ljozwiak.coreprocessing.model.Telemetry;
+import pl.edu.pw.ljozwiak.coreprocessing.repository.ReportRepository;
+import pl.edu.pw.ljozwiak.coreprocessing.repository.TelemetryRepository;
 
 @Path("/single")
 @RequiredArgsConstructor
@@ -19,12 +19,12 @@ public class SingleController {
   private final ReportRepository reportRepository;
 
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Report single() {
+  @Produces(MediaType.TEXT_PLAIN)
+  public String single() {
     Telemetry telemetry = telemetryRepository.getFirst();
     Report report = new TelemetryProcessor().process(telemetry);
     reportRepository.insertOne(report);
 
-    return report;
+    return report.toString();
   }
 }

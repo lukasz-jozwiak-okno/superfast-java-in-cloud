@@ -4,6 +4,8 @@ dependencies {
   annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
   implementation "com.google.guava:guava:$guavaVersion"
+  implementation "org.mongodb:bson:$bsonVersion"
+  implementation "org.mongodb:mongodb-driver-sync:$mongoDriverVersion"
 
   testImplementation "org.codehaus.groovy:groovy-all:$groovyAllVersion"
   testImplementation "org.spockframework:spock-core:$spockVersion"

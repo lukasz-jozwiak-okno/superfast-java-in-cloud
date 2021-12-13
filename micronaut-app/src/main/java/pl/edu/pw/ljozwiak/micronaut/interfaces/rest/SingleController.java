@@ -5,11 +5,11 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Produces;
 import lombok.RequiredArgsConstructor;
-import pl.edu.pw.ljozwiak.coreprocessing.telemetry.Report;
-import pl.edu.pw.ljozwiak.coreprocessing.telemetry.Telemetry;
-import pl.edu.pw.ljozwiak.coreprocessing.telemetry.TelemetryProcessor;
-import pl.edu.pw.ljozwiak.micronaut.infrastructure.mongo.ReportRepository;
-import pl.edu.pw.ljozwiak.micronaut.infrastructure.mongo.TelemetryRepository;
+import pl.edu.pw.ljozwiak.coreprocessing.TelemetryProcessor;
+import pl.edu.pw.ljozwiak.coreprocessing.model.Report;
+import pl.edu.pw.ljozwiak.coreprocessing.model.Telemetry;
+import pl.edu.pw.ljozwiak.coreprocessing.repository.ReportRepository;
+import pl.edu.pw.ljozwiak.coreprocessing.repository.TelemetryRepository;
 
 @RequiredArgsConstructor
 @Controller("/single")
@@ -19,13 +19,13 @@ public class SingleController {
   private final ReportRepository reportRepository;
 
   @Get
-  @Produces(MediaType.APPLICATION_JSON)
-  public Report single() {
+  @Produces(MediaType.TEXT_PLAIN)
+  public String single() {
 
     Telemetry telemetry = telemetryRepository.getFirst();
     Report report = new TelemetryProcessor().process(telemetry);
     reportRepository.insertOne(report);
 
-    return report;
+    return report.toString();
   }
 }
