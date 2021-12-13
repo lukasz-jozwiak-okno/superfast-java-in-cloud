@@ -3,10 +3,11 @@ package pl.edu.pw.ljozwiak.quarkus.domain;
 import javax.enterprise.context.ApplicationScoped;
 import lombok.Data;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import pl.edu.pw.ljozwiak.coreprocessing.repository.MongoProperties;
 
 @ApplicationScoped
 @Data
-public class AppProperties {
+public class AppProperties implements MongoProperties {
 
   @ConfigProperty(name = "app.mongoDbName")
   String mongoDbName;

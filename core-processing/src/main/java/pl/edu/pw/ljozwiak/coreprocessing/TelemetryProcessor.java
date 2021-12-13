@@ -1,10 +1,12 @@
-package pl.edu.pw.ljozwiak.coreprocessing.telemetry;
+package pl.edu.pw.ljozwiak.coreprocessing;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.UUID;
+import pl.edu.pw.ljozwiak.coreprocessing.model.Report;
+import pl.edu.pw.ljozwiak.coreprocessing.model.Telemetry;
 
 public class TelemetryProcessor {
 

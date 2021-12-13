@@ -1,20 +1,17 @@
-package pl.edu.pw.ljozwiak.micronaut.infrastructure.mongo;
+package pl.edu.pw.ljozwiak.coreprocessing.repository;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
-import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import pl.edu.pw.ljozwiak.coreprocessing.telemetry.Telemetry;
-import pl.edu.pw.ljozwiak.micronaut.domain.AppProperties;
+import pl.edu.pw.ljozwiak.coreprocessing.model.Telemetry;
 
 @RequiredArgsConstructor
-@Singleton
 public class TelemetryRepository {
 
   private final MongoClient mongoClient;
-  private final AppProperties appProperties;
+  private final MongoProperties mongoProperties;
 
   public Telemetry getFirst() {
     return getCollection().find().first();
@@ -37,8 +34,9 @@ public class TelemetryRepository {
   }
 
   private MongoCollection<Telemetry> getCollection() {
+
     return mongoClient
-        .getDatabase(appProperties.getMongoDbName())
-        .getCollection(appProperties.getMongoDbTelemetryCollection(), Telemetry.class);
+        .getDatabase(mongoProperties.getMongoDbName())
+        .getCollection(mongoProperties.getMongoDbTelemetryCollection(), Telemetry.class);
   }
 }

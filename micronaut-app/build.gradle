@@ -30,6 +30,7 @@ dependencies {
   implementation 'io.micronaut.mongodb:micronaut-mongo-sync'
   implementation 'io.micronaut:micronaut-validation'
   implementation 'io.micronaut.reactor:micronaut-reactor'
+
   runtimeOnly 'ch.qos.logback:logback-classic'
   compileOnly 'org.graalvm.nativeimage:svm'
 
