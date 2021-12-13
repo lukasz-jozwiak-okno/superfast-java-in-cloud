@@ -1,43 +1,44 @@
 plugins {
-    id 'groovy'
-    id 'com.github.johnrengelman.shadow' version "$shadowJarVersion"
-    id 'io.micronaut.application'  version "$micronautPluginVersion"
+  id 'groovy'
+  id 'com.github.johnrengelman.shadow' version "$shadowJarVersion"
+  id 'io.micronaut.application' version "$micronautPluginVersion"
 }
 
 micronaut {
-    runtime('jetty')
-    testRuntime('spock2')
-    processing {
-        incremental(true)
-        annotations('pl.edu.pw.ljozwiak.*')
-    }
+  runtime('jetty')
+  testRuntime('spock2')
+  processing {
+    incremental(true)
+    annotations('pl.edu.pw.ljozwiak.micronaut.*')
+  }
 }
 
 dependencies {
-    compileOnly "org.projectlombok:lombok:$lombokVersion"
-    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
-    annotationProcessor 'io.micronaut:micronaut-http-validation'
-    annotationProcessor 'io.micronaut.jaxrs:micronaut-jaxrs-processor'
+  compileOnly "org.projectlombok:lombok:$lombokVersion"
+  annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+  annotationProcessor 'io.micronaut:micronaut-http-validation'
+  annotationProcessor 'io.micronaut.jaxrs:micronaut-jaxrs-processor'
 
-    implementation project(':core-processing')
+  implementation project(':core-processing')
 
-    implementation 'io.micronaut:micronaut-http-client'
-    implementation 'io.micronaut:micronaut-runtime'
-    implementation 'io.micronaut.jaxrs:micronaut-jaxrs-server'
-    implementation 'io.micronaut.rxjava3:micronaut-rxjava3'
-    implementation 'io.micronaut.rxjava3:micronaut-rxjava3-http-client'
-    implementation 'javax.annotation:javax.annotation-api'
-    implementation 'io.micronaut.mongodb:micronaut-mongo-sync'
-    implementation 'io.micronaut:micronaut-validation'
-    implementation 'io.micronaut.reactor:micronaut-reactor'
-    runtimeOnly 'ch.qos.logback:logback-classic'
-    compileOnly 'org.graalvm.nativeimage:svm'
+  implementation 'io.micronaut:micronaut-http-client'
+  implementation 'io.micronaut:micronaut-runtime'
+  implementation 'io.micronaut.jaxrs:micronaut-jaxrs-server'
+  implementation 'io.micronaut.rxjava3:micronaut-rxjava3'
+  implementation 'io.micronaut.rxjava3:micronaut-rxjava3-http-client'
+  implementation 'javax.annotation:javax.annotation-api'
+  implementation 'io.micronaut.mongodb:micronaut-mongo-sync'
+  implementation 'io.micronaut:micronaut-validation'
+  implementation 'io.micronaut.reactor:micronaut-reactor'
+  runtimeOnly 'ch.qos.logback:logback-classic'
+  compileOnly 'org.graalvm.nativeimage:svm'
 
-    testAnnotationProcessor 'io.micronaut.jaxrs:micronaut-jaxrs-processor'
-    testImplementation "org.testcontainers:mongodb:$testContainersVersion"
-    testImplementation "org.awaitility:awaitility:$awaitilityVersion"
+  testAnnotationProcessor 'io.micronaut.jaxrs:micronaut-jaxrs-processor'
+  testImplementation "org.testcontainers:mongodb:$testContainersVersion"
+  testImplementation "org.awaitility:awaitility:$awaitilityVersion"
+  testImplementation "io.rest-assured:rest-assured:$restAssuredVersion"
 }
 
 application {
-    mainClass.set('pl.edu.pw.ljozwiak.Application')
+  mainClass.set('pl.edu.pw.ljozwiak.micronaut.Application')
 }

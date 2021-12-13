@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
-import pl.edu.pw.ljozwiak.coreprocessing.Telemetry;
+import pl.edu.pw.ljozwiak.coreprocessing.telemetry.Telemetry;
 import pl.edu.pw.ljozwiak.datagenerator.argument.GenerateDataCommand;
 
 @RequiredArgsConstructor
@@ -50,7 +50,7 @@ public class GenerateCommandHandler {
     return Telemetry.builder()
         .id(UUID.randomUUID().toString())
         .speed(faker.number().numberBetween(0, 300))
-        .fuel(faker.number().numberBetween(0, 100))
+        .fuelLevel(faker.number().numberBetween(0, 100))
         .build();
   }
 }

@@ -1,4 +1,4 @@
-package pl.edu.pw.ljozwiak;
+package pl.edu.pw.ljozwiak.micronaut;
 
 import io.micronaut.runtime.Micronaut;
 import lombok.extern.slf4j.Slf4j;

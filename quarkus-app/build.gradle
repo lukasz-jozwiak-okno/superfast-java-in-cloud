@@ -1,25 +1,25 @@
 plugins {
-    id 'java'
-    id 'io.quarkus' version "$quarkusPluginVersion"
+  id 'java'
+  id 'io.quarkus' version "$quarkusPluginVersion"
 }
 
 dependencies {
-    compileOnly "org.projectlombok:lombok:$lombokVersion"
-    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
-    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+  compileOnly "org.projectlombok:lombok:$lombokVersion"
+  testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+  annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
-    implementation project(':core-processing')
+  implementation project(':core-processing')
 
-    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
-    implementation 'io.quarkus:quarkus-arc'
-    implementation 'io.quarkus:quarkus-config-yaml'
-    implementation 'io.quarkus:quarkus-resteasy'
-    implementation 'io.quarkus:quarkus-resteasy-jackson'
-    implementation 'io.quarkus:quarkus-mongodb-client'
+  implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+  implementation 'io.quarkus:quarkus-arc'
+  implementation 'io.quarkus:quarkus-config-yaml'
+  implementation 'io.quarkus:quarkus-resteasy'
+  implementation 'io.quarkus:quarkus-resteasy-jackson'
+  implementation 'io.quarkus:quarkus-mongodb-client'
 
-    testImplementation 'io.quarkus:quarkus-junit5'
-    testImplementation 'io.rest-assured:rest-assured'
+  testImplementation 'io.quarkus:quarkus-junit5'
+  testImplementation 'io.rest-assured:rest-assured'
 
-    testImplementation "org.testcontainers:mongodb:$testContainersVersion"
-    testImplementation "org.awaitility:awaitility:$awaitilityVersion"
+  testImplementation "org.testcontainers:mongodb:$testContainersVersion"
+  testImplementation "org.awaitility:awaitility:$awaitilityVersion"
 }
