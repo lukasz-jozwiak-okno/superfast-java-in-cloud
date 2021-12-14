@@ -1,7 +1,7 @@
 package pl.edu.pw.ljozwiak.micronaut.infrastructure.mongo
 
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
-import pl.edu.pw.ljozwiak.BaseMongoTest
+import pl.edu.pw.ljozwiak.micronaut.BaseMongoTest
 
 @MicronautTest
 class MongoIT extends BaseMongoTest {

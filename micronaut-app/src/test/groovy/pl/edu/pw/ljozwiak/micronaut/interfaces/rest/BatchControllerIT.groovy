@@ -3,11 +3,11 @@ package pl.edu.pw.ljozwiak.micronaut.interfaces.rest
 import io.micronaut.runtime.server.EmbeddedServer
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
-import pl.edu.pw.ljozwiak.BaseMongoTest
 import pl.edu.pw.ljozwiak.coreprocessing.model.Report
 import pl.edu.pw.ljozwiak.coreprocessing.model.Telemetry
 import pl.edu.pw.ljozwiak.coreprocessing.repository.ReportRepository
 import pl.edu.pw.ljozwiak.coreprocessing.repository.TelemetryRepository
+import pl.edu.pw.ljozwiak.micronaut.BaseMongoTest
 
 import java.time.LocalDateTime
 import java.time.ZoneOffset

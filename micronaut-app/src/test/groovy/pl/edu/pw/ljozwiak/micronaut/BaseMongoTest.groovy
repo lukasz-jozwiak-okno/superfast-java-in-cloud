@@ -1,4 +1,4 @@
-package pl.edu.pw.ljozwiak
+package pl.edu.pw.ljozwiak.micronaut
 
 import com.mongodb.client.MongoClient
 import io.micronaut.test.support.TestPropertyProvider

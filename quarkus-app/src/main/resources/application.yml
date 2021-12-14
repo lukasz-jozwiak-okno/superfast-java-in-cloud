@@ -1,8 +1,5 @@
 # select profile https://stackoverflow.com/questions/65795595/how-to-choose-quarkus-profile-when-running-app-under-idea
 # profile properties can be set by prefixing property: https://antoniogoncalves.org/2019/11/07/configuring-a-quarkus-application-with-profiles/
-greeting:
-  message: "hello"
-
 app:
   mongoDbName: okno
   mongoDbTelemetryCollection: telemetry
