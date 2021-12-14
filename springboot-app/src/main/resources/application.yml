@@ -1,0 +1,5 @@
+app:
+  mongoDbName: okno
+  mongoDbTelemetryCollection: telemetry
+  mongoDbReportCollection: report
+

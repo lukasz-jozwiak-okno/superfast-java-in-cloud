@@ -2,5 +2,6 @@ rootProject.name = 'superfast-java-in-cloud'
 
 include 'micronaut-app'
 include 'quarkus-app'
+include 'springboot-app'
 include 'core-processing'
 include 'data-generator'

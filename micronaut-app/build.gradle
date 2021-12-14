@@ -36,7 +36,6 @@ dependencies {
 
   testAnnotationProcessor 'io.micronaut.jaxrs:micronaut-jaxrs-processor'
   testImplementation "org.testcontainers:mongodb:$testContainersVersion"
-  testImplementation "org.awaitility:awaitility:$awaitilityVersion"
   testImplementation "io.rest-assured:rest-assured:$restAssuredVersion"
 }
 

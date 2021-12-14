@@ -12,9 +12,4 @@ dependencies {
   implementation "com.beust:jcommander:$jCommanderVersion"
   implementation "com.github.javafaker:javafaker:$javaFakerVersion"
   implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-  testImplementation 'org.springframework.boot:spring-boot-starter-test'
-  testImplementation "org.testcontainers:mongodb:$testContainersVersion"
-  testImplementation "org.codehaus.groovy:groovy-all:$groovyAllVersion"
-  testImplementation "org.spockframework:spock-core:$spockVersion"
-  testImplementation "com.athaydes:spock-reports:$spockReportsVersion"
 }

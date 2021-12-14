@@ -21,5 +21,4 @@ dependencies {
   testImplementation 'io.rest-assured:rest-assured'
 
   testImplementation "org.testcontainers:mongodb:$testContainersVersion"
-  testImplementation "org.awaitility:awaitility:$awaitilityVersion"
 }
