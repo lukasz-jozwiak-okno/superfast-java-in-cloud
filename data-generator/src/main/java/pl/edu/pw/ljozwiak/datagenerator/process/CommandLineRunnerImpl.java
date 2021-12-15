@@ -1,6 +1,7 @@
 package pl.edu.pw.ljozwiak.datagenerator.process;
 
 import com.beust.jcommander.JCommander;
+import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -15,14 +16,17 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
   private final ClearCommandHandler clearCommandHandler;
 
   @Override
-  public void run(String... args) throws Exception {
+  public void run(String... args) {
     GenerateDataCommand generateDataCommand = new GenerateDataCommand();
     ClearCommand clearCommand = new ClearCommand();
+
+    String[] onlyProgramParams =
+        Arrays.stream(args).filter(param -> !param.contains("--spring")).toArray(String[]::new);
 
     JCommander jc =
         JCommander.newBuilder().addCommand(generateDataCommand).addCommand(clearCommand).build();
 
-    jc.parse(args);
+    jc.parse(onlyProgramParams);
 
     switch (jc.getParsedCommand()) {
       case GenerateDataCommand.NAME:
