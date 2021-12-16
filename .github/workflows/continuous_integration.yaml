@@ -217,3 +217,32 @@ jobs:
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }} \
           --set-env-vars "SPRING_DATA_MONGODB_URI=${{ secrets.MONGO_URL }}"
+
+  e2e:
+    needs:
+      - quarkus
+      - micronaut
+      - springboot
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Add execute access to maven wrapper
+        run: chmod 755 gradlew
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Download list of services
+        run: gcloud run services list --format="value(URL)" > 'e2e-tests/services.txt'
+
+      - name: Run e2e tests
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: wrapper
+          arguments: -Pe2e.tests.enabled e2e-tests:check --info --stacktrace
