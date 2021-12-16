@@ -1,0 +1,12 @@
+dependencies {
+  testImplementation "org.codehaus.groovy:groovy-all:$groovyAllVersion"
+  testImplementation "org.spockframework:spock-core:$spockVersion"
+  testImplementation "com.athaydes:spock-reports:$spockReportsVersion"
+  testImplementation "io.rest-assured:rest-assured:$restAssuredVersion"
+}
+
+test {
+  onlyIf {
+    project.hasProperty("e2e.tests.enabled")
+  }
+}
