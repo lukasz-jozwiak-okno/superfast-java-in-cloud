@@ -12,7 +12,7 @@ Run e2e tests against provided list of services, particularly deployed on Google
 Download list of deployed Google Cloud Run services and put them into module directory
 
 ```sh
-gcloud run services list | grep URL | awk -F': ' '{print $2}' > 'e2e-tests/services.txt'
+gcloud run services list --format="value(URL)" > 'e2e-tests/services.txt'
 ```
 
 Run e2e tests
