@@ -36,3 +36,8 @@ Github workflow is used to build, test and deploy all modules to dedicated envir
 All modules are deployed on [Google Cloud](https://cloud.google.com/) using [Cloud Run](https://cloud.google.com/run)
 service.  
 Modules deployed to dedicated environment are using [Mongo DB Atlas](https://www.mongodb.com/atlas/database) datasource.
+
+### e2e tests
+
+In order to ensure that application modules work correctly on Cloud Run service, e2e tests are executed after
+deployment. See [e2e-tests](e2e-tests/README.md) module.
