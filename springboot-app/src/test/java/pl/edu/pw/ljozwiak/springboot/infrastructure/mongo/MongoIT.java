@@ -1,6 +1,6 @@
 package pl.edu.pw.ljozwiak.springboot.infrastructure.mongo;
 
-import com.google.common.collect.Lists;
+import java.util.stream.StreamSupport;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +15,7 @@ public class MongoIT extends BaseMongoTest {
   @Test
   public void shouldConnectToMongo() {
     Assertions.assertTrue(
-        Lists.newArrayList(mongoClient.listDatabaseNames()).stream()
+        StreamSupport.stream(mongoClient.listDatabaseNames().spliterator(), false)
             .anyMatch(dbName -> dbName.equals("admin")));
   }
 }
