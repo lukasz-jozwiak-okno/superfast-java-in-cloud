@@ -4,4 +4,49 @@ services:
   mongo:
     image: mongo:4.4.6
     ports:
-      - 27017:27017
+      - "27017:27017"
+
+  micronaut-app-jvm:
+    image: eu.gcr.io/superfast-java-in-cloud/micronaut-app:jvm
+    ports:
+      - "8080:8080"
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/okno
+    depends_on:
+      - mongo
+
+  micronaut-app-native:
+    image: eu.gcr.io/superfast-java-in-cloud/micronaut-app:native
+    ports:
+      - "8081:8080"
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/okno
+    depends_on:
+      - mongo
+
+  quarkus-app-jvm:
+    image: eu.gcr.io/superfast-java-in-cloud/quarkus-app:jvm
+    ports:
+      - "8082:8080"
+    environment:
+      QUARKUS_MONGODB_CONNECTION_STRING: mongodb://mongo:27017/okno
+    depends_on:
+      - mongo
+
+  quarkus-app-native:
+    image: eu.gcr.io/superfast-java-in-cloud/quarkus-app:native
+    ports:
+      - "8083:8080"
+    environment:
+      QUARKUS_MONGODB_CONNECTION_STRING: mongodb://mongo:27017/okno
+    depends_on:
+      - mongo
+
+  springboot-app-jvm:
+    image: eu.gcr.io/superfast-java-in-cloud/springboot-app:jvm
+    ports:
+      - "8084:8080"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/okno
+    depends_on:
+      - mongo

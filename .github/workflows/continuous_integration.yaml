@@ -82,14 +82,14 @@ jobs:
       - name: Deploy Quarkus Jvm App
         if: github.ref == 'refs/heads/master'
         run: |
-          docker image tag lukaszjozwiak/quarkus-app:jvm eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/quarkus-app:jvm
-          docker push eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/quarkus-app:jvm
+          docker image tag lukaszjozwiak/quarkus-app:jvm eu.gcr.io/superfast-java-in-cloud/quarkus-app:jvm
+          docker push eu.gcr.io/superfast-java-in-cloud/quarkus-app:jvm
           gcloud run deploy quarkus-app-jvm \
           --region europe-central2 \
-          --image eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/quarkus-app:jvm \
+          --image eu.gcr.io/superfast-java-in-cloud/quarkus-app:jvm \
           --platform managed \
           --allow-unauthenticated \
-          --project ${{ secrets.GCP_PROJECT_ID }} \
+          --project superfast-java-in-cloud \
           --set-env-vars "QUARKUS_MONGODB_CONNECTION_STRING=${{ secrets.MONGO_URL }}"
 
         # Mongo URL requires to be in old format https://github.com/quarkusio/quarkus/issues/7986
@@ -97,14 +97,14 @@ jobs:
       - name: Deploy Quarkus Native App
         if: github.ref == 'refs/heads/master'
         run: |
-          docker image tag lukaszjozwiak/quarkus-app:native eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/quarkus-app:native
-          docker push eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/quarkus-app:native
+          docker image tag lukaszjozwiak/quarkus-app:native eu.gcr.io/superfast-java-in-cloud/quarkus-app:native
+          docker push eu.gcr.io/superfast-java-in-cloud/quarkus-app:native
           gcloud run deploy quarkus-app-native \
           --region europe-central2 \
-          --image eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/quarkus-app:native \
+          --image eu.gcr.io/superfast-java-in-cloud/quarkus-app:native \
           --platform managed \
           --allow-unauthenticated \
-          --project ${{ secrets.GCP_PROJECT_ID }} \
+          --project superfast-java-in-cloud \
           --set-env-vars "^##^QUARKUS_MONGODB_CONNECTION_STRING=${{ secrets.MONGO_URL_OLD }}"
 
   micronaut:
@@ -150,27 +150,27 @@ jobs:
       - name: Deploy Micronaut Jvm App
         if: github.ref == 'refs/heads/master'
         run: |
-          docker image tag lukaszjozwiak/micronaut-app:jvm eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:jvm
-          docker push eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:jvm
+          docker image tag lukaszjozwiak/micronaut-app:jvm eu.gcr.io/superfast-java-in-cloud/micronaut-app:jvm
+          docker push eu.gcr.io/superfast-java-in-cloud/micronaut-app:jvm
           gcloud run deploy micronaut-app-jvm \
           --region europe-central2 \
-          --image eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:jvm \
+          --image eu.gcr.io/superfast-java-in-cloud/micronaut-app:jvm \
           --platform managed \
           --allow-unauthenticated \
-          --project ${{ secrets.GCP_PROJECT_ID }} \
+          --project superfast-java-in-cloud \
           --set-env-vars "MONGODB_URI=${{ secrets.MONGO_URL }}"
 
       - name: Deploy Micronaut Native App
         if: github.ref == 'refs/heads/master'
         run: |
-          docker image tag lukaszjozwiak/micronaut-app:native eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:native
-          docker push eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:native
+          docker image tag lukaszjozwiak/micronaut-app:native eu.gcr.io/superfast-java-in-cloud/micronaut-app:native
+          docker push eu.gcr.io/superfast-java-in-cloud/micronaut-app:native
           gcloud run deploy micronaut-app-native \
           --region europe-central2 \
-          --image eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/micronaut-app:native \
+          --image eu.gcr.io/superfast-java-in-cloud/micronaut-app:native \
           --platform managed \
           --allow-unauthenticated \
-          --project ${{ secrets.GCP_PROJECT_ID }} \
+          --project superfast-java-in-cloud \
           --set-env-vars "MONGODB_URI=${{ secrets.MONGO_URL }}"
 
 
@@ -208,14 +208,14 @@ jobs:
       - name: Deploy SpringBoot Jvm App
         if: github.ref == 'refs/heads/master'
         run: |
-          docker image tag lukaszjozwiak/springboot-app:jvm eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/springboot-app:jvm
-          docker push eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/springboot-app:jvm
+          docker image tag lukaszjozwiak/springboot-app:jvm eu.gcr.io/superfast-java-in-cloud/springboot-app:jvm
+          docker push eu.gcr.io/superfast-java-in-cloud/springboot-app:jvm
           gcloud run deploy springboot-app-jvm \
           --region europe-central2 \
-          --image eu.gcr.io/${{ secrets.GCP_PROJECT_ID }}/springboot-app:jvm \
+          --image eu.gcr.io/superfast-java-in-cloud/springboot-app:jvm \
           --platform managed \
           --allow-unauthenticated \
-          --project ${{ secrets.GCP_PROJECT_ID }} \
+          --project superfast-java-in-cloud \
           --set-env-vars "SPRING_DATA_MONGODB_URI=${{ secrets.MONGO_URL }}"
 
   e2e:
