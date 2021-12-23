@@ -1,8 +1,10 @@
 package pl.edu.pw.ljozwiak.micronaut.interfaces.rest
 
 import io.micronaut.runtime.server.EmbeddedServer
+import io.micronaut.test.annotation.MockBean
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
+import pl.edu.pw.ljozwiak.coreprocessing.DelayService
 import pl.edu.pw.ljozwiak.coreprocessing.model.Report
 import pl.edu.pw.ljozwiak.coreprocessing.model.Telemetry
 import pl.edu.pw.ljozwiak.coreprocessing.repository.ReportRepository
@@ -27,6 +29,14 @@ class BatchControllerIT extends BaseMongoTest {
   @Inject
   ReportRepository reportRepository
 
+  @Inject
+  DelayService delayService
+
+  @MockBean(DelayService)
+  DelayService delayService() {
+    Mock(DelayService)
+  }
+
   def 'should return report of all telemetries'() {
     given:
       def telemetry1 = Telemetry.builder()
@@ -43,14 +53,25 @@ class BatchControllerIT extends BaseMongoTest {
           .build()
       telemetryRepository.insertOne(telemetry1)
       telemetryRepository.insertOne(telemetry2)
-
-    expect:
+    when:
       given().get("${server.getURL()}batch")
           .then()
           .statusCode(200)
           .body(containsString("20.0"))
-    and:
+    then:
       List<Report> reports = reportRepository.findAll()
       reports.size() == 1
+    and:
+      1 * delayService.delay(Optional.empty())
+  }
+
+  def 'should process request with delay'() {
+    when:
+      given().queryParam("delay", 10)
+          .get("${server.getURL()}batch")
+          .then()
+          .statusCode(200)
+    then:
+      1 * delayService.delay(Optional.of(10))
   }
 }

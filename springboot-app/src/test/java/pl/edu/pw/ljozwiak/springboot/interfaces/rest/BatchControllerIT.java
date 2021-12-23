@@ -3,6 +3,8 @@ package pl.edu.pw.ljozwiak.springboot.interfaces.rest;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -10,8 +12,10 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
+import pl.edu.pw.ljozwiak.coreprocessing.DelayService;
 import pl.edu.pw.ljozwiak.coreprocessing.model.Report;
 import pl.edu.pw.ljozwiak.coreprocessing.model.Telemetry;
 import pl.edu.pw.ljozwiak.coreprocessing.repository.ReportRepository;
@@ -25,6 +29,7 @@ public class BatchControllerIT extends BaseMongoTest {
 
   @Autowired TelemetryRepository telemetryRepository;
   @Autowired ReportRepository reportRepository;
+  @SpyBean DelayService delayService;
   @LocalServerPort int port;
 
   @Test
@@ -54,5 +59,16 @@ public class BatchControllerIT extends BaseMongoTest {
 
     List<Report> reports = reportRepository.findAll();
     assertEquals(1, reports.size());
+    verify(delayService, times(1)).delay((Integer) null);
+  }
+
+  @Test
+  public void shouldProcessRequestWithDelay() {
+    given()
+        .queryParam("delay", 10)
+        .get("http://localhost:" + port + "/batch")
+        .then()
+        .statusCode(200);
+    verify(delayService, times(1)).delay(10);
   }
 }
