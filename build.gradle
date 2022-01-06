@@ -17,7 +17,7 @@ buildscript {
     jCommanderVersion = '1.82'
     guavaVersion = '31.0.1-jre'
     restAssuredVersion = '4.4.0'
-    bsonVersion = '4.4.0'
+    bsonVersion = '4.4.1'
     mongoDriverVersion = '4.4.0'
   }
 }
