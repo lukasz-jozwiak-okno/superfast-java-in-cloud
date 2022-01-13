@@ -19,6 +19,7 @@ buildscript {
     restAssuredVersion = '4.4.0'
     bsonVersion = '4.4.1'
     mongoDriverVersion = '4.4.0'
+    jacocoToolVersion = '0.8.7'
   }
 }
 
@@ -27,6 +28,7 @@ plugins {
   id 'java'
   id 'groovy'
   id 'com.diffplug.spotless' version "$spotlessVersion"
+  id 'jacoco'
 }
 
 project('core-processing') {
@@ -44,6 +46,7 @@ subprojects {
   apply plugin: 'java'
   apply plugin: 'groovy'
   apply plugin: 'com.diffplug.spotless'
+  apply plugin: 'jacoco'
 
   spotless {
     java {
@@ -67,5 +70,21 @@ subprojects {
 
   compileTestJava {
     options.encoding = 'UTF-8'
+  }
+
+  test {
+    finalizedBy jacocoTestReport
+  }
+
+  jacocoTestReport {
+    reports {
+      xml.required = false
+      csv.required = false
+      html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+  }
+
+  jacoco {
+    toolVersion = jacocoToolVersion
   }
 }
