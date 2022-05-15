@@ -2,7 +2,7 @@ buildscript {
   ext {
     groovyAllVersion = '3.0.9'
     spockVersion = '2.0-groovy-3.0'
-    spotlessVersion = '6.0.0'
+    spotlessVersion = '6.6.1'
     spockReportsVersion = '2.1.1-groovy-3.0'
     testContainersVersion = '1.16.2'
     lombokVersion = '1.18.22'
