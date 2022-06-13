@@ -16,7 +16,7 @@ buildscript {
     quarkusPlatformVersion = '2.6.2.Final'
     jCommanderVersion = '1.82'
     guavaVersion = '31.0.1-jre'
-    restAssuredVersion = '4.4.0'
+    restAssuredVersion = '4.5.1'
     bsonVersion = '4.4.1'
     mongoDriverVersion = '4.4.1'
     jacocoToolVersion = '0.8.7'
