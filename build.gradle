@@ -13,7 +13,7 @@ buildscript {
     micronautVersion = '3.2.0'
     micronautPluginVersion = '2.0.8'
     quarkusPluginVersion = '2.5.1.Final'
-    quarkusPlatformVersion = '2.6.2.Final'
+    quarkusPlatformVersion = '2.10.2.Final'
     jCommanderVersion = '1.82'
     guavaVersion = '31.0.1-jre'
     restAssuredVersion = '4.4.0'
