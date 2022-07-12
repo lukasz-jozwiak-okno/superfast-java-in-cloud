@@ -11,7 +11,7 @@ buildscript {
     springDependencyManagementVersion = '1.0.11.RELEASE'
     shadowJarVersion = '7.1.0'
     micronautVersion = '3.2.0'
-    micronautPluginVersion = '2.0.8'
+    micronautPluginVersion = '3.5.0'
     quarkusPluginVersion = '2.5.1.Final'
     quarkusPlatformVersion = '2.6.2.Final'
     jCommanderVersion = '1.82'
